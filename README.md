@@ -118,6 +118,5 @@ Bu proje, kullanıcıların güvenli bir şekilde sisteme kayıt olup giriş yap
 
 Bu proje, JWT tabanlı kimlik doğrulamanın temellerini öğrenmek isteyenler için oldukça faydalıdır. Hem frontend hem de backend tarafında kullanılan teknolojiler ve yapılan konfigürasyonlar, gerçek dünya projelerinde karşılaşılabilecek güvenlik ve oturum yönetimi ihtiyaçlarını karşılamak için iyi bir örnektir
 
---
 
 
