@@ -1,98 +1,135 @@
-# JWT Tabanlı Giriş Sistemi (Spring Boot + HTML)
-Bu proje, Veritabanı Yönetim Sistemleri (VTYS) dersi kapsamında geliştirilmiş bir web uygulamasıdır. Uygulama, kullanıcıların sisteme kayıt olup giriş yapabildiği, JWT (JSON Web Token) ile kimlik doğrulaması yapan basit ve profesyonel bir çözüm sunmaktadır. Frontend kısmı sade HTML/CSS/JS ile, backend kısmı ise Spring Boot (Java) ve H2 bellek içi veritabanı ile geliştirilmiştir.
 
-## Teknolojiler
+#  JWT Tabanlı Giriş Sistemi (Spring Boot + HTML)
 
-Backend :	Java 17, Spring Boot, JPA
-Güvenlik : Spring Security, JWT
-Veritabanı : H2 In-Memory DB
-Frontend	: HTML, CSS, Vanilla JavaScript
-Build Tool	: Maven
+Bu proje, **Veritabanı Yönetim Sistemleri (VTYS)** dersi kapsamında geliştirilmiş bir web uygulamasıdır.  
+Kullanıcıların sisteme kayıt olup giriş yapabildiği, **JWT (JSON Web Token)** ile kimlik doğrulaması yapan basit ve profesyonel bir çözüm sunar.  
 
-## Projeyi Çalıştırma
+🔹 Backend: Spring Boot (Java) + H2 In-Memory DB  
+🔹 Frontend: HTML, CSS ve JavaScript (Vanilla)
+
+---
+
+##  Teknolojiler
+
+| Katman     | Teknoloji                  |
+|------------|----------------------------|
+| Backend    | Java 17, Spring Boot, JPA  |
+| Güvenlik   | Spring Security, JWT       |
+| Veritabanı | H2 In-Memory DB            |
+| Frontend   | HTML, CSS, JS              |
+| Build Tool | Maven                      |
+
+---
+
+##  Projeyi Çalıştırma
+
 ### Gereksinimler
 - Java 17
-
 - Maven 3.8+
 
-### Çalıştırma Adımları
-1. Projeyi GitHub'dan klonlayın:
+### Adımlar
 
-bash
-"git clone https://github.com/kullaniciAdi/jwt-login-vtys.git"
-2. Proje dizinine gidin:
+```bash
+git clone https://github.com/kullaniciAdi/jwt-login-vtys.git
+cd jwt-login-vtys
+mvn spring-boot:run
+```
 
-bash
-"cd jwt-login-vtys"
-3. Spring Boot uygulamasını çalıştırın:
+🔗 Tarayıcıda uygulamayı aç:
+```
+http://localhost:8080
+```
 
-bash
-"mvn spring-boot:run"
-4. Uygulama arayüzüne tarayıcı üzerinden şu link ile erişebilirsiniz:
+🔗 H2 Console (veritabanı testleri için):
+```
+http://localhost:8080/h2-console
+JDBC URL: jdbc:h2:mem:testdb
+```
 
-arduino
-"http://localhost:8080"
-5. H2 Console için şu URL'yi kullanabilirsiniz:
+---
 
-bash
-"http://localhost:8080/h2-console"
-"JDBC URL: jdbc:h2:mem:testdb"
-## Özellikler
-- Kullanıcı kayıt olma (Ad, Soyad, E-posta, Şifre)
+##  Özellikler
 
-- Giriş yapma (JWT token alma)
+-  Kullanıcı kayıt olma (Ad, Soyad, E-posta, Şifre)
+-  Kullanıcı giriş yapma (JWT token üretimi)
+-  JWT token geçerlilik süresi (örneğin 60 saniye)
+-  Token `localStorage` ile saklanır
+-  Süresi dolan tokenlar reddedilir
+-  Sayfa yenilense bile geçerli token varsa oturum korunur
 
-- JWT token üretimi ve süresi (örn. 60 saniye)
+---
 
-- Token tarayıcıda saklanır (localStorage)
+##  API Endpoint'leri
 
-- Token süresi dolunca kullanıcı uyarılır
+| Yöntem | Endpoint               | Açıklama          |
+|--------|------------------------|-------------------|
+| POST   | `/api/auth/register`  | Kullanıcı kaydı   |
+| POST   | `/api/auth/login`     | Giriş ve token    |
 
-- Token süresi ölçülür ve süre bitince geçersiz olur
+---
 
-- Sayfa yenilense bile geçerli token varsa oturum korunur
+##  Proje Yapısı
 
-## API Endpoint'leri
-
-POST : /api/auth/register	=> Kullanıcı kaydı
-POST	/api/auth/login => 	Giriş + JWT token
-
-## Proje Yapısı
-
+```
 src
 ├── main
 │   ├── java/com/example/jwtlogin
-│   │   ├── config/           → Güvenlik ayarları (SecurityConfig)
-│   │   ├── controller/       → API kontrolcüsü (AuthController)
-│   │   ├── model/            → Kullanıcı nesnesi (User)
-│   │   ├── repository/       → Veritabanı erişimi (UserRepository)
-│   │   ├── security/         → JWT token aracı (JwtTokenUtil)
-│   │   └── service/          → İş mantığı (AuthService)
+│   │   ├── config/        # SecurityConfig
+│   │   ├── controller/    # AuthController
+│   │   ├── model/         # User
+│   │   ├── repository/    # UserRepository
+│   │   ├── security/      # JwtTokenUtil
+│   │   └── service/       # AuthService
 │   └── resources
-│       ├── static/           → Frontend (index.html, script.js, style.css)
+│       ├── static/        # index.html, script.js, style.css
 │       └── application.properties
-## Konfigürasyon (application.properties)
+```
 
+---
+
+##  Konfigürasyon Örnekleri
+
+```properties
 server.port=8080
 spring.datasource.url=jdbc:h2:mem:testdb
 spring.h2.console.enabled=true
 spring.jpa.hibernate.ddl-auto=update
 jwt.secret=your-secret-key-here-must-be-at-least-32-characters-long
 jwt.expiration=60
-## Güvenlik ve JWT
-Bu projede güvenlik için Spring Security kullanılmıştır. Kullanıcıların sisteme güvenli bir şekilde giriş yapabilmesi için JWT (JSON Web Token) kullanılmaktadır. JWT, kullanıcının kimliğini doğrulamak için şifrelenmiş bir token oluşturur ve bu token, kullanıcının her isteğiyle birlikte gönderilir.
+```
 
-JWT token'ın süresi belirli bir süreyle sınırlıdır (örneğin 60 saniye). Token süresi dolduğunda kullanıcı yeniden giriş yapmalıdır.
+---
 
-## Ekstra Özellikler
-- Kullanıcılar kayıt olduktan sonra JWT token alabilir ve bu token ile sisteme giriş yapabilir.
+##  Güvenlik & JWT
 
-- Frontend kısmı, kullanıcının token bilgisini localStorage'da saklar, böylece sayfa yenilense bile geçerli bir token varsa kullanıcı oturumunu devam ettirebilir.
+- Sistemde giriş yapan kullanıcıya güvenli bir JWT verilir.
+- JWT, istek başlıklarında gönderilir ve sunucu bu token'ı doğrular.
+- Token, belirli bir sürede (örn. 60 saniye) geçerli olur.
+- Süresi dolmuş token için kullanıcı uyarılır ve yeniden giriş yapması istenir.
 
-- H2 Console, veritabanı sorguları ve test verileri için kullanılabilir.
+---
 
-## Sonuç
-Bu proje, kullanıcıların güvenli bir şekilde sisteme kayıt olup giriş yapmalarını sağlayan bir JWT tabanlı giriş sisteminin temel işlevlerini yerine getirmektedir. Kullanıcı kaydı ve giriş işlemleri başarılı bir şekilde çalışmakta, kullanıcıların giriş yaptıktan sonra oturumları JWT token ile doğrulanmaktadır. Token süresi dolduğunda kullanıcıya uyarı verilmektedir. Bu özellik, uygulamanın güvenliğini artırarak yalnızca geçerli token ile erişime izin verir. Ayrıca, sayfa yenilendiğinde dahi geçerli bir token varsa oturum korunur, bu da kullanıcı deneyimini iyileştirir.
+##  Ekstra Özellikler
 
-Bu proje, JWT tabanlı kimlik doğrulamanın temellerini öğrenmek isteyenler için oldukça faydalıdır. Hem frontend hem de backend tarafında kullanılan teknolojiler ve yapılan konfigürasyonlar, gerçek dünya projelerinde karşılaşılabilecek güvenlik ve oturum yönetimi ihtiyaçlarını karşılamak için iyi bir örnektir.
+- Kayıt sonrası giriş yapılabilir.
+- Token `localStorage` üzerinde tutulur.
+- Sayfa yenilendiğinde geçerli token varsa kullanıcı oturumu korunur.
+- Süresi dolmuş token için özel hata mesajı gösterilir.
+- H2 veritabanı ile test ve demo yapma kolaylığı sağlar.
+
+---
+
+##  Sonuç
+
+Bu proje:
+
+- Temel bir JWT kimlik doğrulama sistemini eksiksiz olarak sunar.
+- Spring Security ile güvenliği, H2 ile veritabanı testini sağlar.
+- Token yönetimini frontend üzerinde gösterir.
+- VTYS dersi kapsamında teslim edilebilecek seviyede, eksiksiz bir projedir.
+
+Öğrenciler için JWT'nin mantığını hem backend hem de frontend tarafında deneyimleme imkânı sağlar. Gerçek dünyadaki kimlik doğrulama sistemlerine giriş için mükemmel bir örnektir.
+
+--
+
 
