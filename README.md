@@ -1,23 +1,17 @@
 
 #  JWT Tabanlı Giriş Sistemi (Spring Boot + HTML)
 
-Bu proje, **Veritabanı Yönetim Sistemleri (VTYS)** dersi kapsamında geliştirilmiş bir web uygulamasıdır.  
-Kullanıcıların sisteme kayıt olup giriş yapabildiği, **JWT (JSON Web Token)** ile kimlik doğrulaması yapan basit ve profesyonel bir çözüm sunar.  
-
-🔹 Backend: Spring Boot (Java) + H2 In-Memory DB  
-🔹 Frontend: HTML, CSS ve JavaScript (Vanilla)
+Bu proje, Veritabanı Yönetim Sistemleri (VTYS) dersi kapsamında geliştirilmiş bir web uygulamasıdır. Uygulama, kullanıcıların sisteme kayıt olup giriş yapabildiği, JWT (JSON Web Token) ile kimlik doğrulaması yapan basit ve profesyonel bir çözüm sunmaktadır. Frontend kısmı sade HTML/CSS/JS ile, backend kısmı ise Spring Boot (Java) ve H2 bellek içi veritabanı ile geliştirilmiştir.
 
 ---
 
 ##  Teknolojiler
 
-| Katman     | Teknoloji                  |
-|------------|----------------------------|
-| Backend    | Java 17, Spring Boot, JPA  |
-| Güvenlik   | Spring Security, JWT       |
-| Veritabanı | H2 In-Memory DB            |
-| Frontend   | HTML, CSS, JS              |
-| Build Tool | Maven                      |
+- Backend : Java 17, Spring Boot, JPA
+- Güvenlik : Spring Security, JWT 
+- Veritabanı : H2 In-Memory DB 
+- Frontend : HTML, CSS, Vanilla JavaScript 
+- Build Tool : Maven
 
 ---
 
@@ -35,12 +29,12 @@ cd jwt-login-vtys
 mvn spring-boot:run
 ```
 
-🔗 Tarayıcıda uygulamayı aç:
+-  Tarayıcıda uygulamayı aç:
 ```
 http://localhost:8080
 ```
 
-🔗 H2 Console (veritabanı testleri için):
+-  H2 Console (veritabanı testleri için):
 ```
 http://localhost:8080/h2-console
 JDBC URL: jdbc:h2:mem:testdb
@@ -61,10 +55,9 @@ JDBC URL: jdbc:h2:mem:testdb
 
 ##  API Endpoint'leri
 
-| Yöntem | Endpoint               | Açıklama          |
-|--------|------------------------|-------------------|
-| POST   | `/api/auth/register`  | Kullanıcı kaydı   |
-| POST   | `/api/auth/login`     | Giriş ve token    |
+
+ POST   | `/api/auth/register`  | Kullanıcı kaydı   
+ POST   | `/api/auth/login`     | Giriş ve token    
 
 ---
 
@@ -121,14 +114,9 @@ jwt.expiration=60
 
 ##  Sonuç
 
-Bu proje:
+Bu proje, kullanıcıların güvenli bir şekilde sisteme kayıt olup giriş yapmalarını sağlayan bir JWT tabanlı giriş sisteminin temel işlevlerini yerine getirmektedir. Kullanıcı kaydı ve giriş işlemleri başarılı bir şekilde çalışmakta, kullanıcıların giriş yaptıktan sonra oturumları JWT token ile doğrulanmaktadır. Token süresi dolduğunda kullanıcıya uyarı verilmektedir. Bu özellik, uygulamanın güvenliğini artırarak yalnızca geçerli token ile erişime izin verir. Ayrıca, sayfa yenilendiğinde dahi geçerli bir token varsa oturum korunur, bu da kullanıcı deneyimini iyileştirir.
 
-- Temel bir JWT kimlik doğrulama sistemini eksiksiz olarak sunar.
-- Spring Security ile güvenliği, H2 ile veritabanı testini sağlar.
-- Token yönetimini frontend üzerinde gösterir.
-- VTYS dersi kapsamında teslim edilebilecek seviyede, eksiksiz bir projedir.
-
-Öğrenciler için JWT'nin mantığını hem backend hem de frontend tarafında deneyimleme imkânı sağlar. Gerçek dünyadaki kimlik doğrulama sistemlerine giriş için mükemmel bir örnektir.
+Bu proje, JWT tabanlı kimlik doğrulamanın temellerini öğrenmek isteyenler için oldukça faydalıdır. Hem frontend hem de backend tarafında kullanılan teknolojiler ve yapılan konfigürasyonlar, gerçek dünya projelerinde karşılaşılabilecek güvenlik ve oturum yönetimi ihtiyaçlarını karşılamak için iyi bir örnektir
 
 --
 
