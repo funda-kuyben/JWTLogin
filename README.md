@@ -78,18 +78,7 @@ src
 │       └── application.properties
 ```
 
----
 
-##  Konfigürasyon Örnekleri
-
-```properties
-server.port=8080
-spring.datasource.url=jdbc:h2:mem:testdb
-spring.h2.console.enabled=true
-spring.jpa.hibernate.ddl-auto=update
-jwt.secret=your-secret-key-here-must-be-at-least-32-characters-long
-jwt.expiration=60
-```
 
 ---
 
